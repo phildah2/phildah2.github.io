@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Karita</title>
+<title>Karita - Your Asylum Chatbot</title>
 <style>
   body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #fff; /* Changed to white as per requirement */
     color: #333;
   }
 
@@ -22,27 +22,15 @@
   header {
     background: #fff;
     padding: 20px 0;
-    border-bottom: #ccc 1px solid;
-  }
-
-  header .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    text-align: center; /* Centered the title */
   }
 
   header h1 {
     font-size: 24px;
-    color: #333;
+    color: #FF113F; /* Changed to specified color */
   }
 
-  .introduction {
-    background: #fff;
-    padding: 20px;
-    margin-top: 20px;
-  }
-
-  .detailed-content {
+  .introduction, .detailed-content {
     background: #fff;
     padding: 20px;
     margin-top: 20px;
@@ -50,13 +38,12 @@
 
   .chatbot-image {
     width: 100%;
-    max-width: 400px;
     margin-top: 20px;
   }
 
   footer {
-    background: #333;
-    color: #fff;
+    background: #fff; /* Changed to white */
+    color: #FF113F; /* Changed to specified color */
     text-align: center;
     padding: 10px 0;
     position: fixed;
@@ -67,37 +54,36 @@
 </head>
 <body>
 <header>
-  <div class="container">
-    <h1>Asylum Advisor Chatbot</h1>
-  </div>
+  <h1>Karita - Your Asylum Chatbot</h1>
 </header>
 
-<section class="introduction">
-  <div class="container">
-    <h2>A New Way to Navigate Asylum Procedures</h2>
-    <p>Our chatbot provides clear, simple advice based on your documents to guide you through the asylum process.</p>
-  </div>
-</section>
+<div class="container">
+  <section class="introduction">
+    <h2>Empowering Your Asylum Journey</h2>
+    <p>Meet Karita, your dedicated asylum advisory chatbot, here to simplify the complexities of asylum procedures.</p>
+  </section>
 
-<section class="detailed-content">
-  <div class="container">
-    <h3>Understanding Our Chatbot</h3>
-    <p>With advanced algorithms, our chatbot interprets uploaded documents to deliver precise, polite, and practical advice on asylum procedures. Empathetic in its approach, it ensures users are guided with the utmost care, respecting the delicate nature of asylum applications.</p>
+  <img src="karita_office.png" alt="Karita - Asylum Advisor Chatbot" class="chatbot-image">
+
+  <section class="detailed-content">
+    <h3>Explore Karita's Capabilities</h3>
+    <p>Understanding the intricacies of asylum law requires a compassionate and knowledgeable guide. Karita is designed to analyze your documents and provide clear, practical advice. Whether you're dealing with application forms, legal queries, or procedural doubts, Karita is programmed to assist with precision and empathy.</p>
+    <!-- SEO content placeholder -->
+    <p>
+      <!-- SEO text starts -->
+      Asylum seeking can be a daunting journey filled with uncertainties. Karita brings a sense of clarity and direction to this process, offering support and guidance tailored to your unique situation. Built with cutting-edge technology, Karita understands the sensitivity required in handling asylum applications and ensures that your queries are met with informative and respectful responses.
+      <!-- Add more content to reach 500 words, focusing on the chatbot's features, benefits, and the user experience. -->
+    </p>
     <!-- Chatbot Script Here -->
     <script src="path-to-your-chatbot-script.js"></script>
-  </div>
-</section>
-
-<section class="container">
-  <img src="karita_office.png" alt="Asylum Advisor Chatbot" class="chatbot-image">
-</section>
+  </section>
+</div>
 
 <footer>
-  <p>&copy; 2023 Compassionate Asylum Advisor Chatbot</p>
+  <p>&copy; 2023 Karita - Your Asylum Chatbot</p>
 </footer>
 
-
-  <script type="text/javascript">
+<script type="text/javascript">
   (function(d, t) {
       var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
       v.onload = function() {
