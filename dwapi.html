@@ -28,19 +28,38 @@
     With access to philipp.docuware.cloud <br>
 (file cabinet names and indexfield names)
   </div>
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Ihre anderen Head-Elemente hier -->
+</head>
+<body>
+    <!-- Ihr Webseiteninhalt hier -->
 
-<script type="text/javascript">
-  (function(d, t) {
-      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-      v.onload = function() {
-        window.voiceflow.chat.load({
-          verify: { projectID: '655d1b98f0b2a60008992167' },
-          url: 'https://general-runtime.voiceflow.com',
-          versionID: 'production'
-        });
-      }
-      v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-  })(document, 'script');
-</script>
+    <!-- Der Chatbot-Skript-Code -->
+    <script type="text/javascript">
+        (function(d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function() {
+                window.voiceflow.chat.load({
+                    verify: { projectID: '655df34af0b2a60008992654' },
+                    url: 'https://general-runtime.voiceflow.com',
+                    versionID: 'production'
+                });
+
+                // Hier wird der Klick auf die Sprechblase simuliert
+                setTimeout(function() {
+                    var chatBubble = document.querySelector('.chat-bubble'); // Ersetzen Sie '.chat-bubble' durch den tatsächlichen Selektor Ihrer Sprechblase
+                    if (chatBubble) {
+                        chatBubble.click(); // Simuliert den Klick auf die Sprechblase
+                    }
+                }, 1000); // Ändern Sie die Verzögerung (in Millisekunden) nach Bedarf
+            };
+            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+        })(document, 'script');
+    </script>
+</body>
+</html>
+
 </body>
 </html>
