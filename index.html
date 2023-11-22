@@ -21,24 +21,49 @@
       /* Add any other styling you need */
     }
   </style>
+<link rel="stylesheet" href="styles.css">
+<script src="navigation.js" defer></script>
 </head>
 <body>
-  <div class="docuware-blue-text">
-    Click on the speech bubble at the bottom right to open the chatbot.
-  </div>
+<nav id="main-nav"></nav>
 
-  <script type="text/javascript">
+
+<body>
+    <!-- Ihr Webseiteninhalt hier -->
+    <main>
+      <section class="content">
+        <img src="workflow.png" width="200" alt="API Background" class="responsive-img">
+        <h1>WF Expressions</h1>
+        <p></p>
+        <p class="example">e.g., "check whether payment has been received, output either paid, <br>
+          overdue (up to 7 days overdue) or to be dunned"</p>
+        <p class="warning">ONLY FOR INTERNAL TEST USAGE<br>DO NOT FORWARD TO ANYONE EXTERNAL</p>
+      </section>
+    </main>
+<!-- Der Chatbot-Skript-Code -->
+<script type="text/javascript">
     (function(d, t) {
         var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
         v.onload = function() {
-          window.voiceflow.chat.load({
-            verify: { projectID: '65511d2e5605a20007a63040' },
-            url: 'https://general-runtime.voiceflow.com',
-            versionID: 'production'
-          });
-        }
+            window.voiceflow.chat.load({
+                verify: { projectID: '65511d2e5605a20007a63040' },
+                url: 'https://general-runtime.voiceflow.com',
+                versionID: 'production'
+            });
+
+            // Hier wird der Klick auf die Sprechblase simuliert
+            setTimeout(function() {
+                var chatLauncher = document.querySelector('.vfrc-widget--launcher'); // Der Selektor für die Sprechblase
+                if (chatLauncher) {
+                    var chatButton = chatLauncher.querySelector('.vfrc-launcher'); // Der Button innerhalb der Sprechblase
+                    if (chatButton) {
+                        chatButton.click(); // Simuliert den Klick auf die Sprechblase
+                    }
+                }
+            }, 1000); // Ändern Sie die Verzögerung (in Millisekunden) nach Bedarf
+        };
         v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
     })(document, 'script');
-  </script>
+</script>
 </body>
 </html>

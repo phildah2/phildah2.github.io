@@ -21,24 +21,36 @@
       /* Add any other styling you need */
     }
   </style>
+<link rel="stylesheet" href="styles.css">
+<script src="navigation.js" defer></script>
 </head>
 <body>
-  <div class="docuware-blue-text">
-    Click on the speech bubble at the bottom right to open the chatbot.<br><br><br>
-    With access to philipp.docuware.cloud <br>
-(file cabinet names and indexfield names)
-  </div>
+<nav id="main-nav"></nav>
+
 
 <body>
     <!-- Ihr Webseiteninhalt hier -->
-
+    <!-- Ihr Webseiteninhalt hier -->
+    <main>
+      <section class="content">
+        <img src="api.png" width="200" alt="API Background" class="responsive-img">
+        <h1>WF Expressions with DW API</h1>
+        <p></p>
+        With access to philipp.docuware.cloud <br>
+        (file cabinet names and indexfield names)<br><br>
+        
+        e.g. "list my indexfields ignore systemfields"<br>
+        e.g. "check in fc Dokumente if both numbers are similar"
+        <p class="warning">ONLY FOR INTERNAL TEST USAGE<br>DO NOT FORWARD TO ANYONE EXTERNAL</p>
+      </section>
+    </main>
 <!-- Der Chatbot-Skript-Code -->
 <script type="text/javascript">
     (function(d, t) {
         var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
         v.onload = function() {
             window.voiceflow.chat.load({
-                verify: { projectID: '655df34af0b2a60008992654' },
+                verify: { projectID: '655d1b98f0b2a60008992167' },
                 url: 'https://general-runtime.voiceflow.com',
                 versionID: 'production'
             });

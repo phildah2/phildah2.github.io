@@ -4,8 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Insert the HTML code for the navigation here
   nav.innerHTML = `
     <ul>
-      <li><a href="index2.html">Home</a></li>
-      // Other navigation links
+      <li><a href="index2.html">WF</a></li>
+      <li><a href="dwhelp.html">Help</a></li>
+      <li><a href="dw_partner.html">Partner</a></li>
+      <li><a href="dwapi.html">WF mit API</a></li>
+      
     </ul>
   `;
 });
