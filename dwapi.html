@@ -32,27 +32,30 @@
 <body>
     <!-- Ihr Webseiteninhalt hier -->
 
-    <!-- Der Chatbot-Skript-Code -->
-    <script type="text/javascript">
-        (function(d, t) {
-            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-            v.onload = function() {
-                window.voiceflow.chat.load({
-                    verify: { projectID: '655df34af0b2a60008992654' },
-                    url: 'https://general-runtime.voiceflow.com',
-                    versionID: 'production'
-                });
+<!-- Der Chatbot-Skript-Code -->
+<script type="text/javascript">
+    (function(d, t) {
+        var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+        v.onload = function() {
+            window.voiceflow.chat.load({
+                verify: { projectID: '655df34af0b2a60008992654' },
+                url: 'https://general-runtime.voiceflow.com',
+                versionID: 'production'
+            });
 
-                // Hier wird der Klick auf die Sprechblase simuliert
-                setTimeout(function() {
-                    var chatBubble = document.querySelector('.chat-bubble'); // Ersetzen Sie '.chat-bubble' durch den tatsächlichen Selektor Ihrer Sprechblase
-                    if (chatBubble) {
-                        chatBubble.click(); // Simuliert den Klick auf die Sprechblase
+            // Hier wird der Klick auf die Sprechblase simuliert
+            setTimeout(function() {
+                var chatLauncher = document.querySelector('.vfrc-widget--launcher'); // Der Selektor für die Sprechblase
+                if (chatLauncher) {
+                    var chatButton = chatLauncher.querySelector('.vfrc-launcher'); // Der Button innerhalb der Sprechblase
+                    if (chatButton) {
+                        chatButton.click(); // Simuliert den Klick auf die Sprechblase
                     }
-                }, 1000); // Ändern Sie die Verzögerung (in Millisekunden) nach Bedarf
-            };
-            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-        })(document, 'script');
-    </script>
+                }
+            }, 1000); // Ändern Sie die Verzögerung (in Millisekunden) nach Bedarf
+        };
+        v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+    })(document, 'script');
+</script>
 </body>
 </html>
