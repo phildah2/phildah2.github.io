@@ -1,0 +1,22 @@
+/* Hier fügst du die Schriftarten und allgemeinen Stile hinzu, die den Screenshots ähneln. */
+body {
+  font-family: 'Deine Schriftart', sans-serif;
+}
+
+nav {
+  /* Stile für die Navigation */
+}
+
+.content {
+  /* Stile für den Inhalt */
+}
+
+.responsive-img {
+  width: 100%;
+  height: auto;
+}
+
+.warning {
+  color: red;
+  font-weight: bold;
+}
