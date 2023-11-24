@@ -23,6 +23,20 @@
   </style>
 <link rel="stylesheet" href="styles.css">
 <script src="navigation.js" defer></script>
+  <script type="text/javascript">
+  var webAuth = new auth0.WebAuth({
+    domain:       'dev-aili3g0kbihxihy2.us.auth0.com', // Replace with your Auth0 domain
+    clientID:     'KPKdSC2G8o6fU6CYm3l72Q9cpyuHXQPb', // Replace with your Auth0 client ID
+    redirectUri:  window.location.href,
+    responseType: 'token id_token',
+    scope:        'openid profile email'
+  });
+
+  document.getElementById('login').addEventListener('click', function() {
+    webAuth.authorize();
+  });
+</script>
+
 </head>
 <body>
 <nav id="main-nav"></nav>
