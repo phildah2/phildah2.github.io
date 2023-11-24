@@ -2,91 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Auth0 Integration</title>
-    <!-- Load Auth0 SDK first -->
+    <title>Auth0 Integration with Voiceflow</title>
     <script src="https://cdn.auth0.com/js/auth0/9.16/auth0.min.js"></script>
 </head>
 <body>
     <h1>Welcome to My App</h1>
     <button id="login">Log In</button>
     <button id="logout" style="display:none;">Log Out</button>
-<script type="text/javascript">
-    var webAuth = new auth0.WebAuth({
-        domain:       'dev-aili3g0kbihxihy2.us.auth0.com',
-        clientID:     'KPKdSC2G8o6fU6CYm3l72Q9cpyuHXQPb',
-        redirectUri:  window.location.href,
-        responseType: 'token id_token',
-        scope:        'openid profile email'
-    });
-
-    document.getElementById('login').addEventListener('click', function() {
-        webAuth.authorize();
-    });
-
-    // Add the logout event listener within the window.onload function
-    window.onload = function() {
-        webAuth.parseHash(function(err, authResult) {
-            if (authResult && authResult.accessToken && authResult.idToken) {
-                // Store the tokens locally, e.g., in localStorage (not recommended for production!)
-                localStorage.setItem('accessToken', authResult.accessToken);
-                window.location.hash = '';
-                // Handle the authentication result
-
-                // After successful login, show the logout button
-                document.getElementById('logout').style.display = 'block';
-                document.getElementById('login').style.display = 'none';
-            } else if (err) {
-                console.error("Error parsing the authentication hash:", err);
-            }
+    <script type="text/javascript">
+        var webAuth = new auth0.WebAuth({
+            domain: 'dev-aili3g0kbihxihy2.us.auth0.com',
+            clientID: 'KPKdSC2G8o6fU6CYm3l72Q9cpyuHXQPb',
+            redirectUri: window.location.href,
+            responseType: 'token id_token',
+            scope: 'openid profile email'
         });
 
-        // Ensure the logout button is present in your HTML for this to work
-        document.getElementById('logout').addEventListener('click', function() {
-            webAuth.logout({
-                returnTo: 'https://phildah2.github.io/partner_auth.html' // Replace with your GitHub Pages URL
+        document.getElementById('login').addEventListener('click', function() {
+            webAuth.authorize();
+        });
+
+        window.onload = function() {
+            webAuth.parseHash(function(err, authResult) {
+                if (authResult && authResult.accessToken && authResult.idToken) {
+                    localStorage.setItem('accessToken', authResult.accessToken);
+                    window.location.hash = '';
+
+                    document.getElementById('logout').style.display = 'block';
+                    document.getElementById('login').style.display = 'none';
+                    
+                    // Zufällige userID generieren
+                    var userID = 'user_' + Math.random().toString(36).substring(2, 15);
+                    localStorage.setItem('userID', userID);
+
+                    // Senden Sie eine Nachricht an Voiceflow, nachdem sich der Benutzer erfolgreich angemeldet hat
+                    sendMessageToVoiceflow("Hallo!", userID);
+                } else if (err) {
+                    console.error("Error parsing the authentication hash:", err);
+                }
             });
-        });
-    };
 
-            function sendMessageToVoiceflow(message) {
-            const accessToken = localStorage.getItem('accessToken'); // Get the token from where you stored it
+            document.getElementById('logout').addEventListener('click', function() {
+                webAuth.logout({
+                    returnTo: 'https://phildah2.github.io/partner_auth.html' // Replace with your return URL
+                });
+            });
+        };
 
-            // Set up the API request to Voiceflow with the token
+        function sendMessageToVoiceflow(message, userID) {
+            const accessToken = localStorage.getItem('accessToken');
             const headers = {
-                'Authorization': `Bearer ${accessToken}`,
-                // Other headers
+                'Authorization': `Bearer VF.DM.6560d8ad9599e20007a2c2ce.viX11KIRDWhGxsaE`,
             };
 
-            // Use fetch or another AJAX method to send the message to Voiceflow's API
-            fetch('https://api.voiceflow.com/v1/runtime/{versionID}/interaction', {
+            fetch(`https://general-runtime.voiceflow.com/state/user/${userID}/interact`, {
                 method: 'POST',
                 headers: headers,
-                body: JSON.stringify({ message: message }),
+                body: JSON.stringify({ action: { type: 'text', payload: message } }),
             })
             .then(response => response.json())
             .then(data => {
-                // Handle the response from Voiceflow
+                console.log('Voiceflow response:', data);
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
         }
 
-</script>
-
-
-    <script type="text/javascript">
-  (function(d, t) {
-      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-      v.onload = function() {
-        window.voiceflow.chat.load({
-          verify: { projectID: '6560d8ad9599e20007a2c2cd' },
-          url: 'https://general-runtime.voiceflow.com',
-          versionID: 'production'
-        });
-      }
-      v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-  })(document, 'script');
-</script>
+        (function(d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function() {
+                window.voiceflow.chat.load({
+                    verify: { projectID: '6560d8ad9599e20007a2c2cd' },
+                    url: 'https://general-runtime.voiceflow.com',
+                    versionID: 'production'
+                });
+            }
+            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
+            v.type = "text/javascript"; 
+            s.parentNode.insertBefore(v, s);
+        })(document, 'script');
+    </script>
 </body>
 </html>
