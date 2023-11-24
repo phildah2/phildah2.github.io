@@ -9,32 +9,44 @@
 <body>
     <h1>Welcome to My App</h1>
     <button id="login">Log In</button>
-    <script type="text/javascript">
-        var webAuth = new auth0.WebAuth({
-            domain:       'dev-aili3g0kbihxihy2.us.auth0.com',
-            clientID:     'KPKdSC2G8o6fU6CYm3l72Q9cpyuHXQPb',
-            redirectUri:  window.location.href,
-            responseType: 'token id_token',
-            scope:        'openid profile email'
+    <button id="logout" style="display:none;">Log Out</button>
+<script type="text/javascript">
+    var webAuth = new auth0.WebAuth({
+        domain:       'dev-aili3g0kbihxihy2.us.auth0.com',
+        clientID:     'KPKdSC2G8o6fU6CYm3l72Q9cpyuHXQPb',
+        redirectUri:  window.location.href,
+        responseType: 'token id_token',
+        scope:        'openid profile email'
+    });
+
+    document.getElementById('login').addEventListener('click', function() {
+        webAuth.authorize();
+    });
+
+    // Add the logout event listener within the window.onload function
+    window.onload = function() {
+        webAuth.parseHash(function(err, authResult) {
+            if (authResult && authResult.accessToken && authResult.idToken) {
+                window.location.hash = '';
+                // Handle the authentication result
+
+                // After successful login, show the logout button
+                document.getElementById('logout').style.display = 'block';
+                document.getElementById('login').style.display = 'none';
+            } else if (err) {
+                console.error("Error parsing the authentication hash:", err);
+            }
         });
 
-        document.getElementById('login').addEventListener('click', function() {
-            webAuth.authorize();
-        });
-
-        // The parseHash function should be inside a window.onload or equivalent DOMContentLoaded event handler
-        // to ensure that it is called after the full page is loaded
-        window.onload = function() {
-            webAuth.parseHash(function(err, authResult) {
-                if (authResult && authResult.accessToken && authResult.idToken) {
-                    window.location.hash = '';
-                    // Handle the authentication result
-                } else if (err) {
-                    console.error("Error parsing the authentication hash:", err);
-                }
+        // Ensure the logout button is present in your HTML for this to work
+        document.getElementById('logout').addEventListener('click', function() {
+            webAuth.logout({
+                returnTo: 'https://phildah2.github.io/partner_auth.html' // Replace with your GitHub Pages URL
             });
-        };
-    </script>
+        });
+    };
+</script>
+
 
     <script type="text/javascript">
   (function(d, t) {
