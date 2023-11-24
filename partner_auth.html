@@ -6,10 +6,42 @@
     <script src="https://cdn.auth0.com/js/auth0/9.16/auth0.min.js"></script>
 </head>
 <body>
+
+
+
+    
     <h1>Welcome to My App</h1>
     <button id="login">Log In</button>
     <button id="logout" style="display:none;">Log Out</button>
     <script type="text/javascript">
+
+       function updateVoiceflowUserToken(userID, accessToken) {
+            const headers = {
+                'Authorization': 'VF.DM.6560d8ad9599e20007a2c2ce.viX11KIRDWhGxsaE',
+                'Content-Type': 'application/json',
+                'versionID': 'production' // or 'production', as appropriate
+
+            };
+
+            const body = {
+                UserToken: 'testToken'  // The key should match the variable name in Voiceflow
+            };
+            console.log('Updating Voiceflow variables with:', body);
+            fetch(`https://general-runtime.voiceflow.com/state/user/${userID}/variables`, {
+                method: 'PATCH',
+                headers: headers,
+                body: JSON.stringify(body),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Voiceflow variables updated:', data);
+            })
+            .catch(error => {
+                console.error('Error updating Voiceflow variables:', error);
+            });
+
+        updateVoiceflowUserToken('testUser', 'testAccessToken');
+
         var webAuth = new auth0.WebAuth({
             domain: 'dev-aili3g0kbihxihy2.us.auth0.com',
             clientID: 'KPKdSC2G8o6fU6CYm3l72Q9cpyuHXQPb',
