@@ -1,28 +1,12 @@
 
 
-<!DOCTYPE html>
-<html>
-<head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CRBX3V3FCN"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-CRBX3V3FCN');
-  </script>
-  <style>
-    .docuware-blue-text {
-      color: #303ab2; /* Replace with the exact hex code for DocuWare blue */
-      font-size: large; /* Adjust the size as needed */
-      text-align: center; /* Center align if needed */
-      font-family: sans-serif;
-      /* Add any other styling you need */
-    }
-  </style>
-<link rel="stylesheet" href="styles.css">
-<script src="navigation.js" defer></script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auth0 Integration</title>
   <script type="text/javascript">
   var webAuth = new auth0.WebAuth({
     domain:       'dev-aili3g0kbihxihy2.us.auth0.com', // Replace with your Auth0 domain
@@ -36,24 +20,13 @@
     webAuth.authorize();
   });
 </script>
-
+    <script src="https://cdn.auth0.com/js/auth0/9.16/auth0.min.js"></script>
 </head>
 <body>
-<nav id="main-nav"></nav>
-
-<main>
-  <section class="content">
-    <img src="partner.png" width="200" alt="API Background" class="responsive-img">
-    <h1>DW Help Bot
-    <a href="https://creator.voiceflow.com/prototype/655df34af8a6368129ebb099"><br>
-      Link to Prototype</a></h1>
-      Password required (contact Philipp Sauer)
-    <p></p>
-    <p class="example">e.g., "How can I recertify?"</p>
-    <p class="example">e.g., "When is the next DocuWorld?"</p>
-    <p class="warning">ONLY FOR INTERNAL TEST USAGE<br>DO NOT FORWARD TO ANYONE EXTERNAL</p>
-  </section>
-</main>
-
+    <h1>Welcome to My App</h1>
+    <button id="login">Log In</button>
+    <script type="text/javascript">
+        // Your Auth0 integration script will go here
+    </script>
 </body>
 </html>
