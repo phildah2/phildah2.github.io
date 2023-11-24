@@ -47,6 +47,31 @@
             });
         });
     };
+
+            function sendMessageToVoiceflow(message) {
+            const accessToken = localStorage.getItem('accessToken'); // Get the token from where you stored it
+
+            // Set up the API request to Voiceflow with the token
+            const headers = {
+                'Authorization': `Bearer ${accessToken}`,
+                // Other headers
+            };
+
+            // Use fetch or another AJAX method to send the message to Voiceflow's API
+            fetch('https://api.voiceflow.com/v1/runtime/{versionID}/interaction', {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ message: message }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response from Voiceflow
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
 </script>
 
 
