@@ -3,37 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Auth0 Integration</title>
-  <script type="text/javascript">
-  var webAuth = new auth0.WebAuth({
-    domain:       'dev-aili3g0kbihxihy2.us.auth0.com', // Replace with your Auth0 domain
-    clientID:     'KPKdSC2G8o6fU6CYm3l72Q9cpyuHXQPb', // Replace with your Auth0 client ID
-    redirectUri:  window.location.href,
-    responseType: 'token id_token',
-    scope:        'openid profile email'
-  });
-
-  document.getElementById('login').addEventListener('click', function() {
-    webAuth.authorize();
-  });
-</script>
+    <!-- Load Auth0 SDK first -->
     <script src="https://cdn.auth0.com/js/auth0/9.16/auth0.min.js"></script>
 </head>
 <body>
     <h1>Welcome to My App</h1>
     <button id="login">Log In</button>
     <script type="text/javascript">
-        // ...
-webAuth.parseHash(function(err, authResult) {
-  if (authResult && authResult.accessToken && authResult.idToken) {
-    window.location.hash = '';
-    // Use the tokens in authResult to make calls to your backend or store them in local storage.
-    // Show the logout button and hide the login button.
-    // Optionally, display user information or load the chatbot.
-  } else if (err) {
-    console.error("Error parsing the authentication hash:", err);
-  }
-});
+        var webAuth = new auth0.WebAuth({
+            domain:       'dev-aili3g0kbihxihy2.us.auth0.com',
+            clientID:     'KPKdSC2G8o6fU6CYm3l72Q9cpyuHXQPb',
+            redirectUri:  window.location.href,
+            responseType: 'token id_token',
+            scope:        'openid profile email'
+        });
 
+        document.getElementById('login').addEventListener('click', function() {
+            webAuth.authorize();
+        });
+
+        // The parseHash function should be inside a window.onload or equivalent DOMContentLoaded event handler
+        // to ensure that it is called after the full page is loaded
+        window.onload = function() {
+            webAuth.parseHash(function(err, authResult) {
+                if (authResult && authResult.accessToken && authResult.idToken) {
+                    window.location.hash = '';
+                    // Handle the authentication result
+                } else if (err) {
+                    console.error("Error parsing the authentication hash:", err);
+                }
+            });
+        };
     </script>
 </body>
 </html>
