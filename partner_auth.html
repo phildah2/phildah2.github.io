@@ -27,6 +27,8 @@
     window.onload = function() {
         webAuth.parseHash(function(err, authResult) {
             if (authResult && authResult.accessToken && authResult.idToken) {
+                // Store the tokens locally, e.g., in localStorage (not recommended for production!)
+                localStorage.setItem('accessToken', authResult.accessToken);
                 window.location.hash = '';
                 // Handle the authentication result
 
