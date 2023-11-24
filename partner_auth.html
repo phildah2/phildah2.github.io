@@ -31,12 +31,12 @@
                     document.getElementById('logout').style.display = 'block';
                     document.getElementById('login').style.display = 'none';
                     
-                    // Zufällige userID generieren
+                    // Generate a random userID
                     var userID = 'user_' + Math.random().toString(36).substring(2, 15);
                     localStorage.setItem('userID', userID);
 
-                    // Senden Sie eine Nachricht an Voiceflow, nachdem sich der Benutzer erfolgreich angemeldet hat
-                    sendMessageToVoiceflow("Hallo!", userID);
+                    // Update Voiceflow UserToken variable with the accessToken
+                    updateVoiceflowUserToken(userID, authResult.accessToken);
                 } else if (err) {
                     console.error("Error parsing the authentication hash:", err);
                 }
@@ -49,39 +49,30 @@
             });
         };
 
-        function sendMessageToVoiceflow(message, userID) {
-            const accessToken = localStorage.getItem('accessToken');
+        function updateVoiceflowUserToken(userID, accessToken) {
             const headers = {
-                'Authorization': `Bearer VF.DM.6560d8ad9599e20007a2c2ce.viX11KIRDWhGxsaE`,
+                'Authorization': 'Bearer VF.DM.6560d8ad9599e20007a2c2ce.viX11KIRDWhGxsaE',
+                'Content-Type': 'application/json',
+                'versionID': 'development' // or 'production', as appropriate
             };
 
-            fetch(`https://general-runtime.voiceflow.com/state/user/${userID}/interact`, {
-                method: 'POST',
+            const body = {
+                UserToken: accessToken  // The key should match the variable name in Voiceflow
+            };
+
+            fetch(`https://general-runtime.voiceflow.com/state/user/${userID}/variables`, {
+                method: 'PATCH',
                 headers: headers,
-                body: JSON.stringify({ action: { type: 'text', payload: message } }),
+                body: JSON.stringify(body),
             })
             .then(response => response.json())
             .then(data => {
-                console.log('Voiceflow response:', data);
+                console.log('Voiceflow variables updated:', data);
             })
-            .catch((error) => {
-                console.error('Error:', error);
+            .catch(error => {
+                console.error('Error updating Voiceflow variables:', error);
             });
         }
-
-        (function(d, t) {
-            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-            v.onload = function() {
-                window.voiceflow.chat.load({
-                    verify: { projectID: '6560d8ad9599e20007a2c2cd' },
-                    url: 'https://general-runtime.voiceflow.com',
-                    versionID: 'production'
-                });
-            }
-            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
-            v.type = "text/javascript"; 
-            s.parentNode.insertBefore(v, s);
-        })(document, 'script');
     </script>
 </body>
 </html>
