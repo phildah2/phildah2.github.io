@@ -35,36 +35,36 @@
                     var userID = 'user_' + Math.random().toString(36).substring(2, 15);
                     localStorage.setItem('userID', userID);
 
-                    function updateVoiceflowUserToken(userID, accessToken) {
-                        const headers = {
-                            'Authorization': 'VF.DM.6560d8ad9599e20007a2c2ce.viX11KIRDWhGxsaE',
-                            'Content-Type': 'application/json',
-                            'versionID': 'production' // or 'production', as appropriate
-                        };
+                    // function updateVoiceflowUserToken(userID, accessToken) {
+                    //     const headers = {
+                    //         'Authorization': 'VF.DM.6560d8ad9599e20007a2c2ce.viX11KIRDWhGxsaE',
+                    //         'Content-Type': 'application/json',
+                    //         'versionID': 'production' // or 'production', as appropriate
+                    //     };
 
-                        const body = {
-                            variables: {
-                                UserToken: accessToken // Pass the accessToken as the UserToken
-                            }
-                        };
+                    //     const body = {
+                    //         variables: {
+                    //             UserToken: accessToken // Pass the accessToken as the UserToken
+                    //         }
+                    //     };
 
-                        console.log('Updating Voiceflow variables with:', body);
-                        fetch(`https://general-runtime.voiceflow.com/state/user/${userID}/variables`, {
-                            method: 'PATCH',
-                            headers: headers,
-                            body: JSON.stringify(body),
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log('Voiceflow variables updated:', data);
-                        })
-                        .catch(error => {
-                            console.error('Error updating Voiceflow variables:', error);
-                        });
-                    }
+                    //     console.log('Updating Voiceflow variables with:', body);
+                    //     fetch(`https://general-runtime.voiceflow.com/state/user/${userID}/variables`, {
+                    //         method: 'PATCH',
+                    //         headers: headers,
+                    //         body: JSON.stringify(body),
+                    //     })
+                    //     .then(response => response.json())
+                    //     .then(data => {
+                    //         console.log('Voiceflow variables updated:', data);
+                    //     })
+                    //     .catch(error => {
+                    //         console.error('Error updating Voiceflow variables:', error);
+                    //     });
+                    // }
 
-                    // Call the function with the correct parameters
-                    updateVoiceflowUserToken(userID, authResult.accessToken);
+                    // // Call the function with the correct parameters
+                    // updateVoiceflowUserToken(userID, authResult.accessToken);
 
                     (function(d, t) {
                         var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
