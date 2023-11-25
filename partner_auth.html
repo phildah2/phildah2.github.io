@@ -23,8 +23,11 @@
             };
 
             const body = {
-                UserToken: 'testToken'  // The key should match the variable name in Voiceflow
+                variables: {
+                    UserToken: 'testToken' // This assumes 'UserToken' is the correct variable name in Voiceflow
+                }
             };
+
             console.log('Updating Voiceflow variables with:', body);
             fetch(`https://general-runtime.voiceflow.com/state/user/${userID}/variables`, {
                 method: 'PATCH',
