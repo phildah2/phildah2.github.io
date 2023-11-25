@@ -74,6 +74,7 @@
                                 url: 'https://general-runtime.voiceflow.com',
                                 versionID: 'production',
                                 userID: userID, // Pass the userID to the chat widget
+                                UserToken: authResult.accessToken,
                             });
                         };
                         v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
