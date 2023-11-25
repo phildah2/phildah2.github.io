@@ -43,7 +43,7 @@
             });
         }
 
-        updateVoiceflowUserToken('testUser', 'testAccessToken');
+        updateVoiceflowUserToken(userID, 'testAccessToken');
 
         var webAuth = new auth0.WebAuth({
             domain: 'dev-aili3g0kbihxihy2.us.auth0.com',
@@ -85,20 +85,20 @@
         };
 
         
-        // (function(d, t) {
-        //     var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-        //     v.onload = function() {
-        //         window.voiceflow.chat.load({
-        //             verify: { projectID: '6560d8ad9599e20007a2c2cd' },
-        //             url: 'https://general-runtime.voiceflow.com',
-        //             versionID: 'production',
-        //             userID: 'TestUser'
-        //         });
-        //     }
-        //     v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
-        //     v.type = "text/javascript"; 
-        //     s.parentNode.insertBefore(v, s);
-        // })(document, 'script');
+        (function(d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function() {
+                window.voiceflow.chat.load({
+                    verify: { projectID: '6560d8ad9599e20007a2c2cd' },
+                    url: 'https://general-runtime.voiceflow.com',
+                    versionID: 'production',
+                    userID: userID,
+                });
+            }
+            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
+            v.type = "text/javascript"; 
+            s.parentNode.insertBefore(v, s);
+        })(document, 'script');
     </script>
 </body>
 </html>
