@@ -13,9 +13,7 @@
     <h1>Welcome to My App</h1>
     <button id="login">Log In</button>
     <button id="logout" style="display:none;">Log Out</button>
-    <script type="text/javascript">
-
-        
+    <script type="text/javascript"> 
        function updateVoiceflowUserToken(userID, accessToken) {
             const headers = {
                 'Authorization': 'VF.DM.6560d8ad9599e20007a2c2ce.viX11KIRDWhGxsaE',
@@ -40,6 +38,7 @@
             .catch(error => {
                 console.error('Error updating Voiceflow variables:', error);
             });
+        }
 
         updateVoiceflowUserToken('testUser', 'testAccessToken');
 
@@ -82,7 +81,7 @@
             });
         };
 
-        }
+        
         (function(d, t) {
             var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
             v.onload = function() {
