@@ -72,17 +72,7 @@ window.onload = function() {
                             }
                         });
                     };
-                                // Hier wird der Klick auf die Sprechblase simuliert
-            setTimeout(function() {
-                var chatLauncher = document.querySelector('.vfrc-widget--launcher'); // Der Selektor für die Sprechblase
-                if (chatLauncher) {
-                    var chatButton = chatLauncher.querySelector('.vfrc-launcher'); // Der Button innerhalb der Sprechblase
-                    if (chatButton) {
-                        chatButton.click(); // Simuliert den Klick auf die Sprechblase
-                    }
-                }
-            }, 1000); // Ändern Sie die Verzögerung (in Millisekunden) nach Bedarf
-        };
+                               
                     v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
                     v.type = "text/javascript"; 
                     s.parentNode.insertBefore(v, s);
