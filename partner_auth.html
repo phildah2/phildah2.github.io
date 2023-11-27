@@ -20,11 +20,17 @@
         });
 
         document.getElementById('login').addEventListener('click', function() {
-    webAuth.authorize({
-        audience: 'https://phildah2.github.io/partner_auth.html#' // Replace with your actual API Identifier
-    });
-});
+            webAuth.authorize({
+                audience: 'https://phildah2.github.io/partner_auth.html#'
+            });
+        });
 
+        function getUserIP(callback) {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => callback(data.ip))
+                .catch(err => console.error('Error fetching IP:', err));
+        }
 
         window.onload = function() {
             webAuth.parseHash(function(err, authResult) {
@@ -38,23 +44,31 @@
                     var userID = 'user_' + Math.random().toString(36).substring(2, 15);
                     localStorage.setItem('userID', userID);
 
-
-
-                    (function(d, t) {
-                        var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-                        v.onload = function() {
-                            window.voiceflow.chat.load({
-                                verify: { projectID: '6560d8ad9599e20007a2c2cd' },
-                                url: 'https://general-runtime.voiceflow.com',
-                                versionID: 'production',
-                                userID: userID, // Pass the userID to the chat widget
-                                launch: { event: {type: "launch", payload: {userToken: authResult.accessToken,}}}
-                            });
-                        };
-                        v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
-                        v.type = "text/javascript"; 
-                        s.parentNode.insertBefore(v, s);
-                    })(document, 'script');
+                    getUserIP(function(ip){
+                        (function(d, t) {
+                            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+                            v.onload = function() {
+                                window.voiceflow.chat.load({
+                                    verify: { projectID: '6560d8ad9599e20007a2c2cd' },
+                                    url: 'https://general-runtime.voiceflow.com',
+                                    versionID: 'production',
+                                    userID: userID, 
+                                    launch: { 
+                                        event: {
+                                            type: "launch", 
+                                            payload: {
+                                                userToken: authResult.accessToken,
+                                                userIP: ip
+                                            }
+                                        }
+                                    }
+                                });
+                            };
+                            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
+                            v.type = "text/javascript"; 
+                            s.parentNode.insertBefore(v, s);
+                        })(document, 'script');
+                    });
                 } else if (err) {
                     console.error("Error parsing the authentication hash:", err);
                 }
@@ -62,7 +76,7 @@
 
             document.getElementById('logout').addEventListener('click', function() {
                 webAuth.logout({
-                    returnTo: 'https://phildah2.github.io/partner_auth.html' // Replace with your return URL
+                    returnTo: 'https://phildah2.github.io/partner_auth.html'
                 });
             });
         };
