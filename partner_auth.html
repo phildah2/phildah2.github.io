@@ -25,54 +25,64 @@
             });
         });
 
-        function getUserIP(callback) {
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => callback(data.ip))
-                .catch(err => console.error('Error fetching IP:', err));
-        }
+function getUserIP(callback) {
+    fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+            console.log('IP fetched:', data.ip); // Log the fetched IP
+            callback(data.ip);
+        })
+        .catch(err => console.error('Error fetching IP:', err));
+}
 
-        window.onload = function() {
-            webAuth.parseHash(function(err, authResult) {
-                if (authResult && authResult.accessToken && authResult.idToken) {
-                    localStorage.setItem('accessToken', authResult.accessToken);
-                    window.location.hash = '';
+window.onload = function() {
+    webAuth.parseHash(function(err, authResult) {
+        if (authResult && authResult.accessToken && authResult.idToken) {
+            console.log('Auth result:', authResult); // Log authentication result
 
-                    document.getElementById('logout').style.display = 'block';
-                    document.getElementById('login').style.display = 'none';
-                    
-                    var userID = 'user_' + Math.random().toString(36).substring(2, 15);
-                    localStorage.setItem('userID', userID);
+            localStorage.setItem('accessToken', authResult.accessToken);
+            window.location.hash = '';
 
-                    getUserIP(function(ip){
-                        (function(d, t) {
-                            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-                            v.onload = function() {
-                                window.voiceflow.chat.load({
-                                    verify: { projectID: '6560d8ad9599e20007a2c2cd' },
-                                    url: 'https://general-runtime.voiceflow.com',
-                                    versionID: 'production',
-                                    userID: userID, 
-                                    launch: { 
-                                        event: {
-                                            type: "launch", 
-                                            payload: {
-                                                userToken: authResult.accessToken,
-                                                userIP: ip
-                                            }
-                                        }
+            document.getElementById('logout').style.display = 'block';
+            document.getElementById('login').style.display = 'none';
+            
+            var userID = 'user_' + Math.random().toString(36).substring(2, 15);
+            localStorage.setItem('userID', userID);
+
+            getUserIP(function(ip){
+                console.log('IP to be sent:', ip); // Log the IP to be sent
+
+                (function(d, t) {
+                    var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+                    v.onload = function() {
+                        console.log('Voiceflow widget loading with:', {userID: userID, userToken: authResult.accessToken, userIP: ip}); // Log payload
+                        window.voiceflow.chat.load({
+                            verify: { projectID: '6560d8ad9599e20007a2c2cd' },
+                            url: 'https://general-runtime.voiceflow.com',
+                            versionID: 'production',
+                            userID: userID, 
+                            launch: { 
+                                event: {
+                                    type: "launch", 
+                                    payload: {
+                                        userToken: authResult.accessToken,
+                                        userIP: ip
                                     }
-                                });
-                            };
-                            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
-                            v.type = "text/javascript"; 
-                            s.parentNode.insertBefore(v, s);
-                        })(document, 'script');
-                    });
-                } else if (err) {
-                    console.error("Error parsing the authentication hash:", err);
-                }
+                                }
+                            }
+                        });
+                    };
+                    v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
+                    v.type = "text/javascript"; 
+                    s.parentNode.insertBefore(v, s);
+                })(document, 'script');
             });
+        } else if (err) {
+            console.error("Error parsing the authentication hash:", err);
+        }
+    });
+};
+
 
             document.getElementById('logout').addEventListener('click', function() {
                 webAuth.logout({
