@@ -2,95 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BotPartner</title>
-    <script src="https://cdn.auth0.com/js/auth0/9.16/auth0.min.js"></script>
+    <meta http-equiv="refresh" content="1;url=https://phildah2.github.io/partner_dev.html#">
+    <title>Redirecting...</title>
 </head>
 <body>
-
-    <h1>Welcome to My App</h1>
-    <button id="login">Log In</button>
-    <button id="logout" style="display:none;">Log Out</button>
-    <script type="text/javascript"> 
-        var webAuth = new auth0.WebAuth({
-            domain: 'dev-aili3g0kbihxihy2.us.auth0.com',
-            clientID: 'KPKdSC2G8o6fU6CYm3l72Q9cpyuHXQPb',
-            redirectUri: window.location.href,
-            responseType: 'token id_token',
-            scope: 'openid profile email'
-        });
-
-        document.getElementById('login').addEventListener('click', function() {
-            webAuth.authorize({
-                audience: 'https://phildah2.github.io/partner_auth.html#'
-            });
-        });
-
-function getUserIP(callback) {
-    fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => {
-            console.log('IP fetched:', data.ip); // Log the fetched IP
-            callback(data.ip);
-        })
-        .catch(err => console.error('Error fetching IP:', err));
-}
-
-window.onload = function() {
-    webAuth.parseHash(function(err, authResult) {
-        if (authResult && authResult.accessToken && authResult.idToken) {
-            console.log('Auth result:', authResult); // Log authentication result
-
-            localStorage.setItem('accessToken', authResult.accessToken);
-            window.location.hash = '';
-
-            document.getElementById('logout').style.display = 'block';
-            document.getElementById('login').style.display = 'none';
-            
-            var userID = 'user_' + Math.random().toString(36).substring(2, 15);
-            localStorage.setItem('userID', userID);
-
-            getUserIP(function(ip){
-                console.log('IP to be sent:', ip); // Log the IP to be sent
-
-                (function(d, t) {
-                    var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-                    v.onload = function() {
-                        console.log('Voiceflow widget loading with:', {userID: userID, userToken: authResult.accessToken, userIP: ip}); // Log payload
-                        window.voiceflow.chat.load({
-                            verify: { projectID: '6564812b9599e20007a2e4e1' },
-                            url: 'https://general-runtime.voiceflow.com',
-                            versionID: 'production',
-                            userID: userID, 
-                            launch: { 
-                                event: {
-                                    type: "launch", 
-                                    payload: {
-                                        userToken: authResult.accessToken,
-                                        userIP: ip
-                                    }
-                                }
-                            }
-                        });
-                    };
-                               
-                    v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
-                    v.type = "text/javascript"; 
-                    s.parentNode.insertBefore(v, s);
-                })(document, 'script');
-            });
-        } else if (err) {
-            console.error("Error parsing the authentication hash:", err);
-        }
-    });
-
-
-
-            document.getElementById('logout').addEventListener('click', function() {
-                webAuth.logout({
-                    returnTo: 'https://phildah2.github.io/partner_auth.html'
-                });
-            });
-        };
-    </script>
+    <p>If you are not redirected automatically, please <a href="https://phildah2.github.io/partner_dev.html#">click here</a> to go to the new page.</p>
 </body>
 </html>
