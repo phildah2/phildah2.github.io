@@ -53,18 +53,19 @@
                 versionID: 'production'
             });
 
-            // Hier wird der Klick auf die Sprechblase simuliert
             setTimeout(function() {
-                var chatLauncher = document.querySelector('.vfrc-widget--launcher'); // Der Selektor für die Sprechblase
+                var chatLauncher = document.querySelector('.vfrc-widget--launcher');
                 if (chatLauncher) {
-                    var chatButton = chatLauncher.querySelector('.vfrc-launcher'); // Der Button innerhalb der Sprechblase
+                    var chatButton = chatLauncher.querySelector('.vfrc-launcher');
                     if (chatButton) {
-                        chatButton.click(); // Simuliert den Klick auf die Sprechblase
+                        chatButton.click();
                     }
                 }
-            }, 1000); // Ändern Sie die Verzögerung (in Millisekunden) nach Bedarf
+            }, 1000); // Warten Sie 1000 ms, bevor der Klick simuliert wird
         };
-        v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+        v.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
+        v.type = "text/javascript"; 
+        s.parentNode.insertBefore(v, s);
     })(document, 'script');
 </script>
 </body>
